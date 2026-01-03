@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhinish Tiwari - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', 'Arial Bold', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: #eefff7;
+            position: relative;
+        }
+
+        /* Large Background Text */
+        .bg-text {
+            position: absolute;
+            font-size: 15vw;
+            font-weight: 900;
+            line-height: 0.85;
+            color: #d0e7dd;
+            text-transform: uppercase;
+            z-index: 1;
+            left: 50px;
+            top: 45%;
+            transform: translateY(-50%);
+            user-select: none;
+            letter-spacing: -8px;
+        }
+
+        /* Content Overlay */
+        .content-overlay {
+            position: absolute;
+            top: 50%;
+            right: 180px;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: black;
+            text-align: right;
+        }
+
+        .content-overlay h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .content-overlay .subtitle {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 600px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 10;
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            justify-content: flex-end;
+            padding: 20px 180px;
+            background: rgba(238, 255, 247, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #d0e7dd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-menu a {
+            color: black;
+            text-decoration: none;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: black;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Social Icons - Right Side Below Name */
+        .social-icons {
+            position: absolute;
+            top: 50%;
+            right: 180px;
+            transform: translateY(calc(-50% + 180px));
+            z-index: 3;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            max-width: 600px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(168, 213, 186, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid #d0e7dd;
+        }
+
+        .social-icons a:hover {
+            background: rgba(168, 213, 186, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(168, 213, 186, 0.4);
+        }
+
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: #2c3e50;
+        }
+
+        /* Profile Image - Left Side */
+        .profile-container {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 85vh;
+            z-index: 2;
+        }
+
+        .profile-container img {
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 15px rgba(168, 213, 186, 0.3));
+        }
+
+        /* Visitor Counter - Bottom Right */
+        .visitor-box {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            z-index: 4;
+            background: #7a837e;
+            border-radius: 16px;
+            padding: 12px 28px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            text-align: center;
+        }
+
+        .visitor-label {
+            color: #ffffff;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .visitor-count {
+            color: #00ff9c;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-family: "Courier New", monospace;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .nav-menu {
+                padding: 20px 80px;
+                gap: 20px;
+            }
+
+            .content-overlay {
+                right: 80px;
+            }
+
+            .social-icons {
+                right: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                overflow: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .nav-menu {
+                padding: 15px 20px;
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-menu a {
+                font-size: 0.9rem;
+            }
+
+            .bg-text {
+                position: relative;
+                font-size: 25vw;
+                left: auto;
+                top: auto;
+                transform: none;
+                text-align: center;
+                letter-spacing: -4px;
+                line-height: 0.9;
+                margin-top: 80px;
+                z-index: 1;
+            }
+
+            .profile-container {
+                position: relative;
+                height: auto;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                left: auto;
+                bottom: auto;
+                margin-top: -100px;
+                z-index: 2;
+            }
+
+            .profile-container img {
+                height: 50vh;
+                max-height: 400px;
+                width: auto;
+                max-width: 90%;
+            }
+
+            .content-overlay {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                text-align: center;
+                padding: 20px;
+                margin: 20px auto;
+                z-index: 3;
+            }
+
+            .content-overlay h1 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+            }
+
+            .content-overlay .subtitle {
+                font-size: 0.9rem;
+                max-width: 100%;
+                line-height: 1.8;
+            }
+
+            .social-icons {
+                position: relative;
+                top: auto;
+                right: auto;
+                transform: none;
+                justify-content: center;
+                margin: 20px auto 40px;
+                max-width: 100%;
+                padding: 0 20px;
+            }
+
+            .social-icons a {
+                width: 45px;
+                height: 45px;
+            }
+
+            .visitor-counter {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                gap: 5px;
+            }
+
+            .counter-digit {
+                width: 35px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="bg-text">
+    </div>
+    <!-- Content Overlay -->
+    <div class="content-overlay">
+        <h1>Abhinish Tiwari</h1>
+        <p class="subtitle">
+           M.Tech Student @ SDSF | Artificial Intelligence & Machine Learning <br>
+           | Learning and Building Practical AI Systems | DAVV Indore
+        </p>
+    </div>
+
+    <!-- Navigation Menu -->
+    <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="pages/projects.html">Projects</a></li>
+        <li><a href="pages/publications.html">Publications</a></li>
+        <li><a href="pages/contact.html">Contact</a></li>
+    </ul>
+
+    <!-- Social Icons -->
+    <div class="social-icons">
+        <a href="https://www.linkedin.com/in/abhinish-tiwari-945914260/" target="_blank" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+        </a>
+        <a href="https://github.com/abhinishtiwari" target="_blank" aria-label="GitHub">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+        </a>
+        <a href="https://x.com/abhinish_tiwari" target="_blank" aria-label="Twitter">
+            <svg viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+        </a>
+        <a href="https://www.kaggle.com/abhinishtiwari" target="_blank" aria-label="Kaggle">
+            <svg viewBox="0 0 24 24">
+                <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.589-1.448 1.374v5.111c0 .235-.117.352-.351.352H5.505c-.236 0-.354-.117-.354-.352V.353c0-.233.118-.353.354-.353h2.431c.234 0 .351.12.351.353v14.343l6.203-6.272c.165-.165.33-.246.495-.246h3.239c.144 0 .236.06.285.18.046.149.034.255-.036.315l-6.555 6.344 6.836 8.507c.095.104.117.208.07.358"/>
+            </svg>
+        </a>
+        <a href="pages/profile_Webpage.html#publications" aria-label="Google Scholar">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
+            </svg>
+        </a>
+        <a href="https://medium.com/@abhinishtiwari" target="_blank" aria-label="Medium">
+            <svg viewBox="0 0 24 24">
+                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Large Background Text -->
+    <div class="bg-text">
+        PORT<br>FOLIO
+    </div>
+    
+    <!-- Profile Image -->
+    <div class="profile-container">
+        <img src="images/IMG_20260102_230918-removebg-preview.png" alt="Abhinish Tiwari">
+    </div>
+
+    <!-- Visitor Counter -->
+    <div class="visitor-box">
+        <div class="visitor-label">VISITORS</div>
+        <div class="visitor-count" id="count">00000</div>
+    </div>
+
+    <!-- 🔥 Firebase Visitor Counter -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+        import {
+            getFirestore,
+            doc,
+            getDoc,
+            setDoc,
+            updateDoc,
+            increment
+        } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRLyI7ZZ5ycH8hz0ahMeuE0N9RHZZ3jQE",
+            authDomain: "visitor-counter-d2826.firebaseapp.com",
+            projectId: "visitor-counter-d2826",
+            storageBucket: "visitor-counter-d2826.firebasestorage.app",
+            messagingSenderId: "303792350208",
+            appId: "1:303792350208:web:5616d799c91720d89ee4e5",
+            measurementId: "G-GSGMF1F2TQ"
+        };
+
+        // Init Firebase
+        const app = initializeApp(firebaseConfig);
+        getAnalytics(app);
+        const db = getFirestore(app);
+
+        const counterRef = doc(db, "stats", "visitors");
+        const countEl = document.getElementById("count");
+
+        function format(num) {
+            return num.toString().padStart(5, "0");
+        }
+
+        /* ✅ STEP 1: SHOW PREVIOUS VALUE IMMEDIATELY */
+        const cachedCount = localStorage.getItem("visitorCount");
+        if (cachedCount !== null) {
+            countEl.textContent = format(Number(cachedCount));
+        }
+
+        /* ✅ STEP 2: UPDATE FROM FIREBASE */
+        async function updateCounter() {
+            const snap = await getDoc(counterRef);
+
+            let newCount;
+            if (!snap.exists()) {
+                newCount = 1;
+                await setDoc(counterRef, { count: newCount });
+            } else {
+                newCount = snap.data().count + 1;
+                await updateDoc(counterRef, { count: increment(1) });
+            }
+
+            countEl.textContent = format(newCount);
+            localStorage.setItem("visitorCount", newCount);
+        }
+
+        updateCounter();
+    </script>
+    
+    <script>
+        // Security: Disable right-click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Security: Disable keyboard shortcuts (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+        document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (view source)
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Security: Disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Security: Console warning
+        console.log('%cSTOP!', 'color: red; font-size: 50px; font-weight: bold;');
+        console.log('%cThis is a browser feature intended for developers. If someone told you to copy-paste something here, it is a scam.', 'font-size: 16px;');
+        console.log('%c⚠️ Pasting anything here could give attackers access to your information.', 'color: red; font-size: 14px;');
+
+        // Security: Detect DevTools
+        (function() {
+            const element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function() {
+                    console.clear();
+                    console.log('%cDeveloper tools detected!', 'color: red; font-size: 20px;');
+                }
+            });
+            console.log(element);
+        })();
+    </script>
+
+</body>
+</html>
