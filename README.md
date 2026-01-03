@@ -85,7 +85,7 @@ python -m http.server
 ````
 
 Then open:
-`http://localhost:8000`
+`https://abhinishtiwari.github.io/`
 
 ---
 
@@ -127,3 +127,4 @@ If you want next:
 
 Just tell me 👍
 ```
+
