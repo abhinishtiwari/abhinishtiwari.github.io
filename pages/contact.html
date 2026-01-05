@@ -69,6 +69,48 @@
             width: 100%;
         }
 
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: rgba(168, 213, 186, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #d0e7dd;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: rgba(168, 213, 186, 0.5);
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #2c3e50;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
         /* Main Content */
         .main-content {
             padding: 150px 180px 60px 180px;
@@ -231,8 +273,62 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             .nav-header {
                 padding: 20px 30px 0 0;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 70%;
+                max-width: 280px;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 0 30px 0;
+                gap: 0;
+                background: rgba(238, 255, 247, 0.98);
+                transition: left 0.3s ease;
+                border-right: 1px solid #d0e7dd;
+                box-shadow: 5px 0 20px rgba(0, 0, 0, 0.15);
+                border-bottom: none;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                padding: 0;
+                border-bottom: 1px solid rgba(208, 231, 221, 0.5);
+            }
+
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+
+            .nav-menu li a {
+                font-size: 1.1rem;
+                font-weight: 500;
+                display: block;
+                padding: 18px 30px;
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu li a:hover {
+                background: rgba(168, 213, 186, 0.3);
+                padding-left: 40px;
+            }
+
+            .nav-menu li a::after {
+                display: none;
             }
 
             .main-content {
@@ -246,9 +342,16 @@
     </style>
 </head>
 <body>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
     <!-- Navigation Header -->
     <nav class="nav-header">
-        <ul class="nav-menu">
+        <ul class="nav-menu" id="navMenu">
             <li><a href="../index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="projects.html">Projects</a></li>
@@ -411,6 +514,37 @@
 
         console.log('%cSTOP!', 'color: red; font-size: 50px; font-weight: bold;');
         console.log('%cThis website is protected.', 'font-size: 16px;');
+    </script>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = navMenu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
