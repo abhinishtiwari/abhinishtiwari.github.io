@@ -313,10 +313,25 @@
 
             .publication-item {
                 flex-direction: column;
+                padding: 20px;
             }
 
             .pub-thumbnail img {
                 width: 100%;
+                max-width: 100%;
+            }
+
+            .pub-links {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .pub-link {
+                flex: 1 1 auto;
+                min-width: calc(33.333% - 7px);
+                text-align: center;
+                font-size: 0.85rem;
+                padding: 10px 12px;
             }
         }
     </style>
